@@ -2,17 +2,20 @@
  * Created by user on 2018/6/29/029.
  */
 
+/**
+ * env value to JS value, check env val is boolean or others
+ */
 export function envVal(val: undefined | 'undefined'): undefined
 export function envVal(val: null | 'null'): null
 export function envVal(val: boolean): boolean
 export function envVal(val: 'no' | 'off' | 'false' | 'disabled'): false
 export function envVal(val: 'yes' | 'on' | 'true' | 'enabled'): true
-export function envVal(val: '1'): 1
-export function envVal(val: '0'): 0
+export function envVal(val: '1' | 1): 1
+export function envVal(val: '0' | 0): 0
 export function envVal(val: number): number
 export function envVal(val: string): string | number
 export function envVal<T>(val: T): T
-export function envVal(val)
+export function envVal(val: unknown)
 {
 	const t = typeof val;
 	const s = String(val).toLowerCase().trim();
@@ -71,17 +74,21 @@ export function envVal(val)
 	return val
 }
 
+/**
+ * when mode2 is true
+ * envBool will only return number or boolean or null
+ */
 export function envBool(val: undefined | 'undefined'): undefined
 export function envBool(val: null | 'null'): null
 export function envBool(val: boolean): boolean
 export function envBool(val: 'no' | 'off' | 'false' | 'disabled'): false
 export function envBool(val: 'yes' | 'on' | 'true' | 'enabled'): true
-export function envBool(val: '1'): 1
-export function envBool(val: '0'): 0
+export function envBool(val: '1' | 1): 1
+export function envBool(val: '0' | 0): 0
 export function envBool(val: number): number
 export function envBool<T>(val: T, mode2: true): number | boolean
 export function envBool<T>(val: T, mode2?: boolean): T | number | boolean
-export function envBool(val, mode2: boolean = true)
+export function envBool(val: unknown, mode2: boolean = true)
 {
 	let v = envVal(val);
 
@@ -99,8 +106,3 @@ export function envBool(val, mode2: boolean = true)
 }
 
 export default envBool;
-
-// @ts-ignore
-exports = Object.assign(envBool, exports);
-
-Object.defineProperty(exports, "__esModule", { value: true });
