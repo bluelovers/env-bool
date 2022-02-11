@@ -2,22 +2,14 @@
  * Created by user on 2018/6/29/029.
  */
 
-/// <reference types="mocha" />
-/// <reference types="benchmark" />
-/// <reference types="chai" />
-/// <reference types="node" />
-
-import envBool, { envVal } from '../index';
-import { chai, relative, expect, path, assert, util, mochaAsync } from './_local-dev';
+import { envBool, envVal } from '../src/index';
+import { inspect } from 'util';
 
 // @ts-ignore
-import { ITest } from 'mocha';
-
-// @ts-ignore
-describe(relative(__filename), () =>
+describe(`test`, () =>
 {
 
-	const tests = [
+	const tests: [any, ReturnType<typeof envBool>, ReturnType<typeof envVal>, ReturnType<typeof envBool>][] = [
 		['1', 1, 1, 1],
 		['0', 0, 0, 0],
 		[1, 1, 1, 1],
@@ -88,31 +80,31 @@ describe(relative(__filename), () =>
 
 	tests.forEach(function ([input, expectedBool, expectedVal, expectedBool2])
 	{
-		describe(`${util.inspect(input)}`, () =>
+		describe(`${inspect(input)}`, () =>
 		{
-			it(`envBool: ${util.inspect(expectedBool)}, mode2 = false`, function ()
+			it(`envBool: ${inspect(expectedBool)}, mode2 = false`, function ()
 			{
 				let actual = envBool(input, false);
-				expect(actual).to.be.deep.equal(expectedBool);
+				expect(actual).toStrictEqual(expectedBool);
 			});
 
-			it(`envVal: ${util.inspect(expectedVal)}`, function ()
+			it(`envVal: ${inspect(expectedVal)}`, function ()
 			{
 				let actual = envVal(input);
-				expect(actual).to.be.deep.equal(expectedVal);
+				expect(actual).toStrictEqual(expectedVal);
 			});
 
 			if (typeof expectedBool2 !== 'undefined')
 			{
-				it(`envBool: ${util.inspect(expectedBool2)}, mode2 = true`, function ()
+				it(`envBool: ${inspect(expectedBool2)}, mode2 = true`, function ()
 				{
 					let actual = envBool(input, true);
-					expect(actual).to.be.deep.equal(expectedBool2);
+					expect(actual).toStrictEqual(expectedBool2);
 
 					// ---------------
 
 					let actual2 = envBool(input);
-					expect(actual2).to.be.deep.equal(expectedBool2);
+					expect(actual2).toStrictEqual(expectedBool2);
 				});
 			}
 		});
