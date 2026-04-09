@@ -1,6 +1,6 @@
 {
   "name": "env-bool",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "將環境變數值轉換為 JavaScript 類型值 (Convert env var value to JS type, support boolean conversion)",
   "keywords": [
     "env-bool",

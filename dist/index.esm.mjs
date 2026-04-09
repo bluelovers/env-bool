@@ -29,5 +29,10 @@ function envBool(e, n = !0) {
   return "string" != typeof r && r;
 }
 
-export { envBool as default, envBool, envVal };
+function envBool2(e) {
+  const n = envBool(e, !0), r = typeof n;
+  return ("number" === r || "boolean" === r) && !!n;
+}
+
+export { envBool as default, envBool, envBool2, envVal };
 //# sourceMappingURL=index.esm.mjs.map

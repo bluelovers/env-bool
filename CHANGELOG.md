@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/bluelovers/env-bool/compare/env-bool@2.0.2...env-bool@2.0.3) (2026-04-09)
+
+
+
+### ✨　Features
+
+* 新增 envBool2 函數並更新測試與文件 ([62e9d1a](https://github.com/bluelovers/env-bool/commit/62e9d1a3f8d1c24c9aed137fbc0f61b07b34cc1c))
+
+
+
 ## [2.0.2](https://github.com/bluelovers/env-bool/compare/env-bool@2.0.1...env-bool@2.0.2) (2026-04-09)
 
 
