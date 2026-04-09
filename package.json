@@ -1,14 +1,20 @@
 {
   "name": "env-bool",
   "version": "2.0.1",
-  "description": "env value to JS value, check env val is boolean or others",
+  "description": "將環境變數值轉換為 JavaScript 類型值 (Convert env var value to JS type, support boolean conversion)",
   "keywords": [
+    "env-bool",
+    "env",
     "bool",
     "boolean",
+    "convert",
+    "transform",
     "coerce",
+    "coercion",
+    "parse",
+    "type",
     "env",
     "environment",
-    "type",
     "val",
     "value",
     "var",
@@ -30,8 +36,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.esm.mjs"
     },
     "./package.json": "./package.json",
     "./src/index.ts": "./src/index.ts"
@@ -45,8 +51,14 @@
     "test": "test"
   },
   "scripts": {
+    "coverage": "yarn run test -- --coverage",
     "pretest": "echo pretest",
-    "test": "jest",
+    "test": "node --run test:jest",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:coverage": "node --run test:jest -- --coverage",
+    "test:jest:snapshot": "node --run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "posttest": "yarn run build",
     "build": "yarn run build:tsdx && yarn run build:dts:bundle",
     "build:dts:bundle": "ynpx dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --no-banner & echo build:dts",
@@ -81,10 +93,12 @@
     "sort-package-json": "yarn-tool sort",
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
-  "packageManager": "yarn@^1.22.11",
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.28",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.17"
+    "@bluelovers/jest-config": "^1.1.11",
+    "@bluelovers/tsconfig": "^2.0.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.2",
+    "@yarn-tool/require-resolve": "^4.0.6",
+    "@yarn-tool/ws-find-up-paths": "^1.0.19"
   }
 }
