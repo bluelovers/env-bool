@@ -18,15 +18,16 @@ npm install env-bool
 ## 使用 (Usage)
 
 ```ts
-import envBool, { envVal } from 'env-bool';
+import envBool, { envVal, envBool2 } from 'env-bool';
 ```
 
 ## 說明 (Description)
 
-此函式庫提供兩個主要函數：
+此函式庫提供三個主要函數：
 
 - **`envVal(val)`** - 將環境變數值轉換為 JavaScript 類型值
 - **`envBool(val, mode2?)`** - 將環境變數值轉換為 JavaScript 類型值（支援布林轉換模式）
+- **`envBool2(val)`** - 將環境變數值轉換為真正的 JavaScript 布林值（只對有效布林字串回傳 true）
 
 > 預設 mode2 = true
 
@@ -122,6 +123,55 @@ envBool(undefined, false) // => undefined
 **回傳值：**
 - `mode2 = true`: 若值為數字或布林則回傳，否則回傳 `false`
 - `mode2 = false`: 回傳轉換後的值
+
+### envBool2(val)
+
+將環境變數值轉換為真正的 JavaScript 布林值。
+
+**與 envBool 的差異：**
+- `envBool('1', true)` 回傳 `1`（數字）
+- `envBool2('1')` 使用 `!!` 雙重否定將數字轉為布林：`!!1` = `true`
+
+**envBool2 使用 `!!` 雙重否定將結果轉為布林值：**
+- 數字會根據 truthy/falsy 轉換（0 為 false，非 0 為 true）
+
+**參數：**
+- `val` - 環境變數值
+
+**回傳值：**
+- `true` - 當值為 truthy（數字非 0、true、'true'、'yes'、'on'、'enabled' 等）
+- `false` - 當值為 falsy（0、false、'false'、'no'、'off'、null、undefined、''、{}、[] 等）
+
+**範例：**
+```ts
+// 數字字串 - 使用 !! 轉換
+envBool2('1')       // => true (!!1 === true)
+envBool2('0')       // => false (!!0 === false)
+envBool2(99)        // => true (!!99 === true)
+envBool2(0)         // => false (!!0 === false)
+
+// 布林值字串
+envBool2('true')    // => true
+envBool2('false')   // => false
+envBool2('yes')     // => true
+envBool2('no')      // => false
+envBool2('on')      // => true
+envBool2('off')     // => false
+envBool2('enabled') // => true
+envBool2('disabled') // => false
+
+// 其他類型
+envBool2(null)      // => false
+envBool2(undefined) // => false
+envBool2({})        // => false
+envBool2([])        // => false
+envBool2('')        // => false
+
+// 特殊數值
+envBool2(-1)        // => true (!!-1 === true)
+envBool2(Infinity)  // => true (!!Infinity === true)
+envBool2(NaN)       // => false (!!NaN === false)
+```
 
 ## 測試結果範例 (Test Results)
 
