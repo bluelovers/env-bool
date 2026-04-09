@@ -5,7 +5,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function envVal(val) {
   const t = typeof val;
   const s = String(val).toLowerCase().trim();
-
   if (t === 'boolean') {
     return val;
   } else if (t === 'undefined' || s === 'undefined') {
@@ -15,7 +14,6 @@ function envVal(val) {
   } else if (t === 'number') {
     return val;
   }
-
   if (t === 'string') {
     if (s === '1') {
       return 1;
@@ -30,27 +28,23 @@ function envVal(val) {
     } else if (/^(?:no|off|false|disabled)$/i.test(s)) {
       return false;
     }
-
     if (/^\-?[1-9]\d*(?:\.\d+)?$/i.test(s)) {
       let n = Number(s);
       return Number.isNaN(n) ? val : n;
     }
   }
-
   return val;
 }
 function envBool(val, mode2 = true) {
   let v = envVal(val);
-
   if (mode2) {
     let t = typeof v;
     return t === 'number' || t === 'boolean' ? v : false;
   }
-
   return typeof v === 'string' ? false : v;
 }
 
-exports["default"] = envBool;
+exports.default = envBool;
 exports.envBool = envBool;
 exports.envVal = envVal;
 //# sourceMappingURL=index.cjs.development.cjs.map

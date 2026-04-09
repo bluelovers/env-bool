@@ -1,49 +1,32 @@
-function envVal(val) {
-  const t = typeof val;
-  const s = String(val).toLowerCase().trim();
-
-  if (t === 'boolean') {
-    return val;
-  } else if (t === 'undefined' || s === 'undefined') {
-    return void 0;
-  } else if (val === null || s === 'null') {
-    return null;
-  } else if (t === 'number') {
-    return val;
-  }
-
-  if (t === 'string') {
-    if (s === '1') {
-      return 1;
-    } else if (s === '0') {
-      return 0;
-    } else if (val === '') {
-      return '';
-    } else if (s === '') {
-      return val;
-    } else if (/^(?:yes|on|true|enabled)$/i.test(s)) {
-      return true;
-    } else if (/^(?:no|off|false|disabled)$/i.test(s)) {
-      return false;
+function envVal(e) {
+  const n = typeof e, r = String(e).toLowerCase().trim();
+  if ("boolean" === n) return e;
+  if ("undefined" !== n && "undefined" !== r) {
+    if (null === e || "null" === r) return null;
+    if ("number" === n) return e;
+    if ("string" === n) {
+      if ("1" === r) return 1;
+      if ("0" === r) return 0;
+      if ("" === e) return "";
+      if ("" === r) return e;
+      if (/^(?:yes|on|true|enabled)$/i.test(r)) return !0;
+      if (/^(?:no|off|false|disabled)$/i.test(r)) return !1;
+      if (/^\-?[1-9]\d*(?:\.\d+)?$/i.test(r)) {
+        let n = Number(r);
+        return Number.isNaN(n) ? e : n;
+      }
     }
-
-    if (/^\-?[1-9]\d*(?:\.\d+)?$/i.test(s)) {
-      let n = Number(s);
-      return Number.isNaN(n) ? val : n;
-    }
+    return e;
   }
-
-  return val;
 }
-function envBool(val, mode2 = true) {
-  let v = envVal(val);
 
-  if (mode2) {
-    let t = typeof v;
-    return t === 'number' || t === 'boolean' ? v : false;
+function envBool(e, n = !0) {
+  let r = envVal(e);
+  if (n) {
+    let e = typeof r;
+    return ("number" === e || "boolean" === e) && r;
   }
-
-  return typeof v === 'string' ? false : v;
+  return "string" != typeof r && r;
 }
 
 export { envBool as default, envBool, envVal };
