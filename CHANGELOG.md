@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/bluelovers/env-bool/compare/env-bool@2.0.1...env-bool@2.0.2) (2026-04-09)
+
+
+
+### 📚　Documentation
+
+* 新增雙語註解與範例，更新 README 與 package.json ([602b6d8](https://github.com/bluelovers/env-bool/commit/602b6d896efe13414d104c01bf6749d7a81442f2))
+
+
+### 🛠　Build System
+
+* update build ([eefea72](https://github.com/bluelovers/env-bool/commit/eefea72c67ecf9ee41ccfc15141b8f9052e4d7ea))
+
+
+
 ## 2.0.1 (2022-02-11)
 
 
